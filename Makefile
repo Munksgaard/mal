@@ -113,7 +113,7 @@ ruby_RUNSTEP =    ruby ../$(2) $(3)
 rust_RUNSTEP =    ../$(2) $(3)
 scala_RUNSTEP =   sbt 'run-main $($(1))$(if $(3), $(3),)'
 vb_RUNSTEP =      mono ../$(2) --raw $(3)
-cl_RUNSTEP =      sbcl --script ../$(2) $(3)
+cl_RUNSTEP =      sbcl --noinform --quit --disable-debugger --noprint --non-interactive --load ../$(2) $(3) 2>/dev/null
 
 
 # Extra options to pass to runtest.py
@@ -202,4 +202,3 @@ $(IMPL_PERF):
           $(call $(impl)_RUNSTEP,stepA,$(call $(impl)_STEP_TO_PROG,stepA),../tests/perf2.mal); \
 	  echo 'Running: $(call $(impl)_RUNSTEP,stepA,$(call $(impl)_STEP_TO_PROG,stepA),../tests/perf3.mal)'; \
           $(call $(impl)_RUNSTEP,stepA,$(call $(impl)_STEP_TO_PROG,stepA),../tests/perf3.mal))
-
