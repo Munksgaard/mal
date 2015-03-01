@@ -1,0 +1,12 @@
+(defun pr-str (datum)
+  (cond
+    ((keywordp datum)
+     (concatenate 'string ":" (string-downcase (symbol-name datum))))
+    ((symbolp datum)
+     (string-downcase (symbol-name datum)))
+    ((numberp datum)
+     (format nil "~A" datum))
+    ((stringp datum)
+     (format nil "~S" datum))
+    ((listp datum)
+     (format nil "(~{~a~^ ~})" (mapcar #'pr-str datum)))))
